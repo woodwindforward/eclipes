@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no"/>
+	<title>蓝色天边</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" type="text/css" media="screen and (max-width: 750px)" href="./css/contact_details_x.css" />
+	<link rel="stylesheet" type="text/css" media="screen and (min-width: 750px)" href="./css/contact_details.css" />
+</head>
+<body>
+	
+	<script>
+		var c_x_right=document.getElementById('c_x_right');
+		var rc_h_right2=document.getElementById('rc_h_right2');
+		
+		document.onclick=function(ev){
+			var ev=ev||window.event;
+			var tar=ev.target||target.srcElement;
+			if(tar.id == "c_x_right"){
+				rc_h_right2.style.display="block";
+			}
+			if(tar.id != "c_x_right"){
+				rc_h_right2.style.display="none";
+			}
+		}
+
+		
+		function rem(){
+			var pc_width;
+			var html=document.getElementsByTagName('html')[0];
+			var Ww=document.documentElement.clientWidth;
+			if(Ww>750){
+				pc_width=1920;
+			}else{
+				pc_width=750;
+			}
+			var scale=Ww/pc_width;
+			html.style.fontSize=scale*100+"px";
+		}
+		rem();
+		window.onresize=function(){
+			rem();
+		}
+	</script>
+</body>
+</html>

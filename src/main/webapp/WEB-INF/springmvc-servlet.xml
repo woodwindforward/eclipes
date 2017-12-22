@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+        <!--  指明controller所在的包路径  -->
+        <context:component-scan base-package="com.jnmd.controller"/>
+        
+        <!--  开启注解  -->  
+        <mvc:annotation-driven/>
+        
+        <!--  ViewResolver试图解析器。 用于支持Servlet,jsp页面解析  -->  
+	   <!--  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" >  
+	        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
+	        <property name="prefix" value="/WEB-INF/admin/"/>  
+	        <property name="suffix" value=".jsp"/>  
+	    </bean> -->  
+        
+        <!-- 
+			location: 代表静态资源在项目中的实际路径
+			mapping:　代表静态资源映射的路径
+		 -->
+	 	 <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+	 	 <mvc:resources location="/WEB-INF/img/" mapping="/img/**"/>
+	 	 <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
+	 	 
+	 	 <!-- fileupload bean -->
+	 	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 	 	<property name="maxUploadSize" value="123456789"/>
+	 	 	<property name="defaultEncoding" value="UTF-8"/>
+	 	 </bean>
+	 	 
+	 	<!--  配置velocity  -->  
+	    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">  
+	        <!-- 配置velocity的配置文件的位置  -->
+	        <property name="configLocation" value="/WEB-INF/velocity.properties" />  
+	        <property name="resourceLoaderPath" value="/WEB-INF/admin" />  
+	    </bean>  
+  
+	    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">  
+	        <!-- <property name="prefix" value="/WEB-INF/vm/" /> -->  
+	        <property name="suffix" value=".vm" />  
+	        <property name="contentType" value="text/html;charset=UTF-8" />  
+		</bean>
+		
+	<!-- 用于将对象转换为 JSON  -->  
+    <!-- <bean id="stringConverter"  
+        class="org.springframework.http.converter.StringHttpMessageConverter">  
+        <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/plain;charset=UTF-8</value>  
+            </list>
+        </property>
+    </bean>  
+    <bean id="jsonConverter"  
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>  
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+        <property name="messageConverters">  
+            <list>  
+                <ref bean="stringConverter" />
+                <ref bean="jsonConverter" />  
+            </list>  
+        </property>  
+    </bean>   -->
+		
+</beans>

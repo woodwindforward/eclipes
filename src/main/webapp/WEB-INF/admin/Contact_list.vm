@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=0.5,maximum-scale=1.0,initial-scale=1.0,user-scalable=no"/>
+	<title>蓝色天边</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<link type="text/javascript" href="./js/jquery.min.js" />
+	<script src="./js/jquery.min.js"></script>
+</head>
+<body>
+	
+	<from action="" method="post">
+		姓名：<input type="text" name="name" id="name"><br>
+		年龄：<input type="text" name="age" id="age"><br>
+		<input type="submit" value="提交">
+	</from>
+	<br>
+	<button id="btn">点击</button>
+	<p id="jsonBack"></p>
+	
+	<script>
+	$(function(){
+		console.log(1111);
+		$("#btn").click(function(){
+			var name = $("#name").val();  
+			var age = $("#age").val();
+			$.ajax({                                          #*jQuery中ajax的最底层封装方法*#
+				type : "post",                             #*请求方式为get或post*#
+				url : "testAjaxController",           #*请求路径*#
+				async:false,                                #*默认为true, 表示异步请求；  false,表示同步请求*#
+				data : {                                      #*发送给服务器的数据*#
+					name : name,
+					age : age
+				},
+				dataType : 'json',                        #*服务器返回的数据类型（xml, html, script, json, text）*#
+				success:function(data){                #*请求成功的回调函数*#
+					#* if(msg.msg ='1'){
+					 	console.log("请求成功的回调函数");
+					 	$("#jsonBack").html(msg.test[0].name + " &nbsp;&nbsp;&nbsp;&nbsp;" + msg.test[0].age);
+						alert("添加成功");
+					 }else if(msg.msg ='0'){
+					 	alert("添加失败");
+					 }*#
+					 console.log(data.name);
+					 $("#jsonBack").html(data.name);
+				},
+				error:function(){                             #*请求失败的回调函数*#
+					console.log("123");
+					console.log("请求失败的回调函数");
+				}
+			});
+		})
+		
+	})
+		
+		
+	</script>
+</body>
+</html>
